@@ -1,0 +1,21 @@
+services:
+  - name: anything-llm
+    type: web
+    env: docker
+    plan: starter                    # <--- Wichtig: Starter-Plan auswählen
+    repo: https://github.com/weckerl/anything-llm
+    branch: main                     # oder 'master', je nachdem
+    rootDir: apps/server            # Beispiel: wenn Dockerfile unter apps/server liegt
+    dockerfilePath: Dockerfile
+    autoDeploy: true
+    disk:
+      name: data
+      mountPath: /data              # Wohin du im Container schreiben möchtest
+      sizeGB: 5                     # Wieviel Platz du brauchst
+    envVars:
+      - key: OPENAI_API_KEY
+        value: replace-me-later
+      - key: LLM_PROVIDER
+        value: openai
+      - key: DEFAULT_MODEL
+        value: gpt-3.5-turbo
